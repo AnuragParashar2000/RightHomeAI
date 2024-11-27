@@ -14,13 +14,14 @@ const App = () => {
                 },
                 body: JSON.stringify({ userId: 1 }), // Example payload
             });
-
+    
             if (!response.ok) {
                 throw new Error('Failed to fetch recommendations');
             }
-
-            const data = await response.json();
-            setRecommendations(data.recommendations || []);
+    
+            const result = await response.json();
+            console.log('Backend response:', result); // Debugging
+            setRecommendations(result.data || []); // Adjusted to match the backend response format
         } catch (error) {
             console.error('Error fetching recommendations:', error);
             setRecommendations([]);
@@ -28,6 +29,7 @@ const App = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <div>
